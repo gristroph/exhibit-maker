@@ -1,0 +1,193 @@
+include "Languages";
+
+using Format, Units, IO;
+
+LawsuitName = "Gunnar v. Doe";
+
+PictureFolder = Folders.Source Folders.Up Folder("Lawsuit");
+
+IncludeFolders = [
+  "2018 12 29 pictures of trash, screen",
+/*
+  "2019 01 03 pictures of trash on screen",
+  "2019 03 15 pictures of trash",
+  "2019 07 06 pictures of trash",
+  "2019 12 28 pictures of trash",
+  "2020 03 30 video of trash coming out, pictures of flow",
+  "2020 04 09 pictures of flow, video with measurements",
+  "2020 04 22 pictures of trash",
+  "2020 04 25 pictures of trash",
+  "2020 05 02 pictures of trash",
+  "2020 05 24 pictures of trash",
+  "2020 06 04 pictures of trash",
+  "2021 05 02 pictures of trash",
+  "2021 05 07 Contech on Murphy Express",
+  "2021 05 10 pictures of trash",
+  "2021 05 12 pictures of trash after Joe left",
+  "2021 05 12 trash before Joe arrived",
+  "2021 05 12 visit by Clean Earth Solutions",
+  "2021 05 18 pictures of trash",
+  "2021 06 03 pictures of trash",
+  "2021 06 09 pictures of trash",
+  "2021 06 14 pictures of trash",
+  "2021 07 01 pictures of trash",
+  "2021 07 11 pictures of trash",
+  "2021 09 27 pictures of trash",
+  "2021 09 29 pictures of trash",
+  "2021 09 30 pictures of Murphy grate filter",
+  "2021 10 27 pictures of trash",
+  "2021 11 26 pictures of trash",
+  "2021 12 07 pictures and video tour of trash",
+  "2021 12 21 pictures of trash",
+  "2022 02 12 pictures of trash",
+  "2022 02 14 pictures of trash",
+  "2022 02 28 Carlos trash pick up",
+  "2022 03 21 storm before and after",
+  "2022 03 23 pictures of trash",
+  "2022 04 26 pictures of trash",
+  "2022 04 27 Carlos trash pick up",
+  "2022 05 23 trash on grate at Murphy",
+  "2022 05 24 to 2022 05 25 before and after, overnight time lapse",
+  "2022 05 25 to 2022 07 01 time lapse",
+  "2022 07 02 pictures of trash",
+  "2022 07 05 Carlos trash pick up",
+  "2022 08 23 pictures of trash and broken camera",
+  "2022 08 29 pictures of trash",
+  "2022 09 01 pictures of trash",
+  "2022 09 11 pictures of trash",
+  "2022 10 29 video of trash",
+  "2022 11 08 pictures and video of trash",
+  "2022 11 09 picture of contech and grate on Westbank",
+  "2022 11 10 install back corner camera",
+  "2022 11 11 rain storm",
+  "2022 11 13 pictures of trash",
+  "2022 11 14 trash and clean-up by Carlos",
+  "2022 12 02 video of two men",
+  "2022 12 03 pictures of trash",
+  "2023 02 23 Murphy contractor looks at drain",
+  "2023 03 01 mystery person looks at drain",
+  "2023 03 09 mystery person with tool",
+  "2023 03 15 mystery person",
+  "2023 03 24 riding lawn mower",
+  "2023 04 03 pictures of trash, chicken wire",
+  "2023 04 09 pictures of trash",
+  "2023 04 13 riding lawn mower",
+  "2023 04 20 riding lawn mower",
+  "2023 05 07 pictures of trash",
+*/
+];
+
+Main.Documents.MyDocument = new MyDocumentClass;
+
+
+
+//==================================================================
+
+class ExibitClass {
+  var        Folder,
+             FileName;
+  ImageClass Image;
+
+  Constructor(folder, path, ImageClass image) {
+    Folder   = folder;
+    FileName = GetFileName(path);
+    Image    = image;
+  }
+
+  Show = Paragraph {
+    SpaceAfter: 10 pts;
+    ParAlignment: ParAlignments.Center;
+    VBox {
+      HAlign: HAligns.Center;
+
+      Paragraph {
+        TextFormat: "f";
+        Image.Taken;
+      };
+
+      Paragraph {
+        Folder;
+        "/";
+        FileName;
+      };
+
+      HBox(null, null, new EdgeClass(5, 0, Colors.LightGray)) {
+        BorderRadius: 10;
+        Image.FitSize(new SizeClass(4 inches, 2.4 inches));
+      };
+    }
+  };
+}
+
+//==================================================================
+
+class MyDocumentClass: DocumentClass {
+  ListClass<ExibitClass> Exibits;
+
+  Constructor {
+    super.Constructor(#586455c1-7c7e-42ef-a73e-da9548a0058a#, "Exibit-Maker");
+
+    Exibits = new(1024);
+    foreach (var folder in IncludeFolders)
+      ReadFolder(Folder(folder));
+  }
+
+  void AddPicture(folder, path) {
+    switch (ToLower(GetFileExtension(path))) {
+      case "heic";
+      case "jpg";
+        var image = Read(path);
+        if (image is valid)
+          Exibits.Add(new(folder, path, image));
+        break;
+    }
+  }
+
+  void ReadFolder(folder) {
+    var dir = Directory(PictureFolder folder);
+    foreach (var f in dir)
+      AddPicture(folder, f.Path);
+  }
+
+  override GetDocument = Document {
+    Section {
+      SectionBreak: SectionBreaks.NextPage;
+      Paragraph {
+        ParAlignment: ParAlignments.Center;
+        TextHeight: 60 pts;
+        SpaceBefore: 2 inches;
+        LawsuitName;
+      };
+    };
+    AddExibits;
+  };
+
+  AddExibits = Section {
+    SectionBreak: SectionBreaks.OddPage;
+    Header: Block {
+      Distance: 0.25 inches;
+      Paragraph {
+        ParAlignment: ParAlignments.Right;
+        LawsuitName
+      };
+      Even: Block {
+        Paragraph {
+          LawsuitName
+        }
+      };
+      First: Block;
+    };
+    Footer: Block {
+      Distance: 0.5 inches;
+      Paragraph {
+        ParAlignment: ParAlignments.Center;
+        Lang.PageNumbers(DocFields.PageNumber, DocFields.PageCount);
+      };
+    };
+
+    foreach (var exibit in Exibits)
+      exibit.Show;
+  };
+}
+
+//==================================================================
