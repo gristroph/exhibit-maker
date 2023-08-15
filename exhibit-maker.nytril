@@ -1,0 +1,16 @@
+using Format, Units;
+
+Main.Documents.MyDocument = new MyDocumentClass;
+
+path = "C:\\Users\\Gunnar\\Google Drive Streaming\\My Drive\\1703 Johnson Way\\Legal, Neighbors\\South Property Line\\2020 Trash Removal\\Shared Folder - Ristroph Stormwater";
+
+class MyDocumentClass: DocumentClass {
+  Constructor {
+    super.Constructor(#89e6df04-696c-402c-b0c8-ebca6c08f217#, "Document");
+  }
+
+  override GetDocument = Document {
+    path;
+  };
+}
+
