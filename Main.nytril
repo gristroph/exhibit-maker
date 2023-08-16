@@ -88,12 +88,14 @@ Main.Documents.MyDocument = new MyDocumentClass;
 class ExhibitClass {
   var        ShortFileName; // the name of the file including the folder, but without the full parent directory name
   var        Description; // comment
+  var        Number;
   ImageClass Image;  // the actual image
 
-  Constructor(shortfilename, ImageClass image, description) {
+  Constructor(shortfilename, ImageClass image, description, number) {
     ShortFileName = shortfilename;
     Image    = image;
     Description = description;
+    Number = number;
   }
 
   Show = Paragraph {
@@ -103,7 +105,7 @@ class ExhibitClass {
       HAlign: HAligns.Center;
 
       Paragraph {
-        "Exhibit 1";
+        "Exhibit " Number;
       };
 
       Paragraph {
@@ -134,17 +136,19 @@ class MyDocumentClass: DocumentClass {
     super.Constructor(#586455c1-7c7e-42ef-a73e-da9548a0058a#, "Exhibit-Maker");
 
     Exhibits = new(1024);
+    var num = 101;
     foreach (var l in EvidenceFiles)
-      AddPicture(l[0],l[1])
+      AddPicture(l[0],l[1],num)
+      num++;
   }
 
-  void AddPicture(filename, description) {
+  void AddPicture(filename, description, number) {
     switch (ToLower(GetFileExtension(filename))) {
       case "heic";
       case "jpg";
         var image = Read(EvidenceFolder filename);
         if (image is valid)
-          Exhibits.Add(new(filename, image, description));
+          Exhibits.Add(new(filename, image, description, number));
         break;
     }
   }
