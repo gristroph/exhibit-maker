@@ -4,10 +4,12 @@ using Format, Units, IO;
 
 LawsuitName = "Gunnar v. Doe";
 
-PictureFolder = Folders.Source Folders.Up Folder("Lawsuit");
+// EvidenceFolder = Folders.Source Folders.Up Folder("Lawsuit");
+EvidenceFolder = "C:\\Users\\Gunnar\\Google Drive Streaming\\My Drive\\1703 Johnson Way\\Legal, Neighbors\\South Property Line\\2020 Trash Removal\\Shared Folder - Ristroph Stormwater\\";
 
-IncludeFolders = [
-  "2018 12 29 pictures of trash, screen",
+EvidenceFiles = [
+  ["2018 12 29 pictures of trash, screen\\IMG_20181229_154945.jpg","Trash."],
+  ["2018 12 29 pictures of trash, screen\\IMG_20181229_154954.jpg","More trash."],
 /*
   "2019 01 03 pictures of trash on screen",
   "2019 03 15 pictures of trash",
@@ -83,15 +85,15 @@ Main.Documents.MyDocument = new MyDocumentClass;
 
 //==================================================================
 
-class ExibitClass {
-  var        Folder,
-             FileName;
-  ImageClass Image;
+class ExhibitClass {
+  var        ShortFileName; // the name of the file including the folder, but without the full parent directory name
+  var        Description; // comment
+  ImageClass Image;  // the actual image
 
-  Constructor(folder, path, ImageClass image) {
-    Folder   = folder;
-    FileName = GetFileName(path);
+  Constructor(shortfilename, ImageClass image, description) {
+    ShortFileName = shortfilename;
     Image    = image;
+    Description = description;
   }
 
   Show = Paragraph {
@@ -101,16 +103,23 @@ class ExibitClass {
       HAlign: HAligns.Center;
 
       Paragraph {
-        TextFormat: "f";
+        "Exhibit 1";
+      };
+
+      Paragraph {
+        "File name: " ShortFileName;
+      };
+
+      Paragraph {
         "Time (from meta data): " Image.Taken;
       };
 
       Paragraph {
-        "File name: " Folder "/" FileName;
+        "Description: " Description;
       };
 
       HBox(null, null, null) {
-        Image.FitSize(new SizeClass(4 inches, 2.4 inches));
+        Image.FitSize(new SizeClass(6 inches, 6 inches));
       };
     }
   };
@@ -119,31 +128,25 @@ class ExibitClass {
 //==================================================================
 
 class MyDocumentClass: DocumentClass {
-  ListClass<ExibitClass> Exibits;
+  ListClass<ExhibitClass> Exhibits;
 
   Constructor {
-    super.Constructor(#586455c1-7c7e-42ef-a73e-da9548a0058a#, "Exibit-Maker");
+    super.Constructor(#586455c1-7c7e-42ef-a73e-da9548a0058a#, "Exhibit-Maker");
 
-    Exibits = new(1024);
-    foreach (var folder in IncludeFolders)
-      ReadFolder(Folder(folder));
+    Exhibits = new(1024);
+    foreach (var l in EvidenceFiles)
+      AddPicture(l[0],l[1])
   }
 
-  void AddPicture(folder, path) {
-    switch (ToLower(GetFileExtension(path))) {
+  void AddPicture(filename, description) {
+    switch (ToLower(GetFileExtension(filename))) {
       case "heic";
       case "jpg";
-        var image = Read(path);
+        var image = Read(EvidenceFolder filename);
         if (image is valid)
-          Exibits.Add(new(folder, path, image));
+          Exhibits.Add(new(filename, image, description));
         break;
     }
-  }
-
-  void ReadFolder(folder) {
-    var dir = Directory(PictureFolder folder);
-    foreach (var f in dir)
-      AddPicture(folder, f.Path);
   }
 
   override GetDocument = Document {
@@ -156,10 +159,10 @@ class MyDocumentClass: DocumentClass {
         LawsuitName;
       };
     };
-    AddExibits;
+    AddExhibits;
   };
 
-  AddExibits = Section {
+  AddExhibits = Section {
     SectionBreak: SectionBreaks.OddPage;
     Header: Block {
       Distance: 0.25 inches;
@@ -178,12 +181,12 @@ class MyDocumentClass: DocumentClass {
       Distance: 0.5 inches;
       Paragraph {
         ParAlignment: ParAlignments.Center;
-        Lang.PageNumbers(DocFields.PageNumber, DocFields.PageCount);
+//        Lang.PageNumbers(DocFields.PageNumber, DocFields.PageCount);
       };
     };
 
-    foreach (var exibit in Exibits)
-      exibit.Show;
+    foreach (var exhibit in Exhibits)
+      exhibit.Show;
   };
 }
 
