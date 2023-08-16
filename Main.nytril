@@ -1,29 +1,38 @@
-include "Languages";
-
 using Format, Units, IO;
 
 // EvidenceFolder = Folders.Source Folders.Up Folder("Lawsuit");
 EvidenceFolder = "C:\\Users\\Gunnar\\Google Drive Streaming\\My Drive\\1703 Johnson Way\\Legal, Neighbors\\South Property Line\\2020 Trash Removal\\Shared Folder - Ristroph Stormwater\\";
 
-EvidenceFiles = [
-  ["2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m16s.jpg","Frame grab from video of trash in storm water outflow."],
-  ["2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m20s.jpg","Frame grab from video of trash in storm water outflow."],
-  ["2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m37s.jpg","Frame grab from video of trash in storm water outflow."],
-  ["2022 05 23 trash on grate at Murphy\\2022 05 23 trash on grate at Murphy Express.jpg","Moon Valley Nurseries tag on the storm inlet on Murphy property."],
-  ["2022 09 01 pictures of trash\\IMG_6129.HEIC","Moon Valley Nurseries tag on Ristroph property."],
-  ["2022 09 11 pictures of trash\\IMG_6974.HEIC","Moon Valley Nurseries tag on Ristroph property."],
-  ["2022 11 08 pictures and video of trash\\IMG_6660.HEIC","Moon Valley Nurseries tag on Ristroph property."],
-  ["2022 11 13 pictures of trash\\IMG_6829.HEIC","Moon Valley Nurseries tag on Ristroph property."],
-  ["2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 03.jpg","Time lapse camera picture before rain."],
-  ["2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 04.jpg","Time lapse camera picture after rain."],
-  ["2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 29.jpg","Time lapse camera picture after rain."],
-  ["2022 07 02 pictures of trash\\IMG_5189.HEIC","Picture of face mask."],
-  ["2022 07 02 pictures of trash\\IMG_5202.HEIC","Picture of different face mask and trash."],
-  ["2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m23s.jpg","Drain outlet before rain."],
-  ["2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m37s.jpg","Drain outlet after rain."],
-  ["2022 05 24 to 2022 05 25 before and after, overnight time lapse\\IMG_4913 - frame at 0m19s.jpg","Aluminum foil."],
-  ["2022 07 02 pictures of trash\\IMG_5195.HEIC","Aluminum foil."],
-  ["2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m44s.jpg","Aluminum foil in trash bag."]
+class EvidenceFileClass {
+  var Path,
+      Comment;
+
+  Constructor(path, comment) {
+    Path    = path;
+    Comment = comment;
+  }
+}
+
+
+EvidenceFileClass[] EvidenceFiles = [
+  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m16s.jpg","Frame grab from video of trash in storm water outflow."),
+  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m20s.jpg","Frame grab from video of trash in storm water outflow."),
+  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m37s.jpg","Frame grab from video of trash in storm water outflow."),
+  new("2022 05 23 trash on grate at Murphy\\2022 05 23 trash on grate at Murphy Express.jpg","Moon Valley Nurseries tag on the storm inlet on Murphy property."),
+  new("2022 09 01 pictures of trash\\IMG_6129.HEIC","Moon Valley Nurseries tag on Ristroph property."),
+  new("2022 09 11 pictures of trash\\IMG_6974.HEIC","Moon Valley Nurseries tag on Ristroph property."),
+  new("2022 11 08 pictures and video of trash\\IMG_6660.HEIC","Moon Valley Nurseries tag on Ristroph property."),
+  new("2022 11 13 pictures of trash\\IMG_6829.HEIC","Moon Valley Nurseries tag on Ristroph property."),
+  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 03.jpg","Time lapse camera picture before rain."),
+  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 04.jpg","Time lapse camera picture after rain."),
+  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 29.jpg","Time lapse camera picture after rain."),
+  new("2022 07 02 pictures of trash\\IMG_5189.HEIC","Picture of face mask."),
+  new("2022 07 02 pictures of trash\\IMG_5202.HEIC","Picture of different face mask and trash."),
+  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m23s.jpg","Drain outlet before rain."),
+  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m37s.jpg","Drain outlet after rain."),
+  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\IMG_4913 - frame at 0m19s.jpg","Aluminum foil."),
+  new("2022 07 02 pictures of trash\\IMG_5195.HEIC","Aluminum foil."),
+  new("2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m44s.jpg","Aluminum foil in trash bag.")
 ];
 
 Main.Documents.MyDocument = new MyDocumentClass;
@@ -46,12 +55,16 @@ class ExhibitClass {
   }
 
   Show = Paragraph {
+    PageBreakBefore: true;
+    DocFields.Anchor(Number);
+
     SpaceAfter: 10 pts;
     ParAlignment: ParAlignments.Center;
     VBox {
       HAlign: HAligns.Center;
 
       Paragraph {
+        TextHeight: 14 pts;
         "Exhibit " Number;
       };
 
@@ -85,26 +98,47 @@ class MyDocumentClass: DocumentClass {
     Exhibits = new(1024);
     var num = 101;
     foreach (var l in EvidenceFiles)
-      AddPicture(l[0],l[1],num)
-      num++;
+      AddPicture(l.Path,l.Comment,num++);
   }
 
   void AddPicture(filename, description, number) {
     switch (ToLower(GetFileExtension(filename))) {
       case "heic";
       case "jpg";
-        var image = Read(EvidenceFolder filename);
+        var image = Read(EvidenceFolder FileName(filename));
         if (image is valid)
           Exhibits.Add(new(filename, image, description, number));
         break;
     }
   }
 
+  TableOfContents = Section {
+    SectionBreak: SectionBreaks.NextPage;
+    Paragraph {
+      ParAlignment: ParAlignments.Center;
+      TextHeight: 20 pts;
+      "Exibits";
+    };
+    foreach (var exhibit in Exhibits) {
+      Paragraph(null, [32 pts]) {
+        exhibit.Number;
+        ")";
+        Tab;
+        Span {
+          Action: new ActionClass(Actions.ToAnchor, exhibit.Number);
+          exhibit.Description;
+        };
+      }
+    }
+  };
+
   override GetDocument = Document {
+    TableOfContents;
     AddExhibits;
   };
 
   AddExhibits = Section {
+    SectionBreak: SectionBreaks.NextPage;
     foreach (var exhibit in Exhibits)
       exhibit.Show;
   };
