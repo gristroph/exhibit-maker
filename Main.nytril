@@ -2,85 +2,25 @@ include "Languages";
 
 using Format, Units, IO;
 
-LawsuitName = "Gunnar v. Doe";
+LawsuitName = "";
 
 // EvidenceFolder = Folders.Source Folders.Up Folder("Lawsuit");
 EvidenceFolder = "C:\\Users\\Gunnar\\Google Drive Streaming\\My Drive\\1703 Johnson Way\\Legal, Neighbors\\South Property Line\\2020 Trash Removal\\Shared Folder - Ristroph Stormwater\\";
 
 EvidenceFiles = [
+  ["2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m16s.jpg","Frame grab from video of trash in storm water outflow."],
+  ["2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m20s.jpg","Frame grab from video of trash in storm water outflow."],
+  ["2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m37s.jpg","Frame grab from video of trash in storm water outflow."],
   ["2022 05 23 trash on grate at Murphy\\2022 05 23 trash on grate at Murphy Express.jpg","Moon Valley Nurseries tag on the storm inlet on Murphy property."],
   ["2022 09 01 pictures of trash\\IMG_6129.HEIC","Moon Valley Nurseries tag on Ristroph property."],
   ["2022 09 11 pictures of trash\\IMG_6974.HEIC","Moon Valley Nurseries tag on Ristroph property."],
   ["2022 11 08 pictures and video of trash\\IMG_6660.HEIC","Moon Valley Nurseries tag on Ristroph property."],
   ["2022 11 13 pictures of trash\\IMG_6829.HEIC","Moon Valley Nurseries tag on Ristroph property."],
-
-/*
-  "2019 01 03 pictures of trash on screen",
-  "2019 03 15 pictures of trash",
-  "2019 07 06 pictures of trash",
-  "2019 12 28 pictures of trash",
-  "2020 03 30 video of trash coming out, pictures of flow",
-  "2020 04 09 pictures of flow, video with measurements",
-  "2020 04 22 pictures of trash",
-  "2020 04 25 pictures of trash",
-  "2020 05 02 pictures of trash",
-  "2020 05 24 pictures of trash",
-  "2020 06 04 pictures of trash",
-  "2021 05 02 pictures of trash",
-  "2021 05 07 Contech on Murphy Express",
-  "2021 05 10 pictures of trash",
-  "2021 05 12 pictures of trash after Joe left",
-  "2021 05 12 trash before Joe arrived",
-  "2021 05 12 visit by Clean Earth Solutions",
-  "2021 05 18 pictures of trash",
-  "2021 06 03 pictures of trash",
-  "2021 06 09 pictures of trash",
-  "2021 06 14 pictures of trash",
-  "2021 07 01 pictures of trash",
-  "2021 07 11 pictures of trash",
-  "2021 09 27 pictures of trash",
-  "2021 09 29 pictures of trash",
-  "2021 09 30 pictures of Murphy grate filter",
-  "2021 10 27 pictures of trash",
-  "2021 11 26 pictures of trash",
-  "2021 12 07 pictures and video tour of trash",
-  "2021 12 21 pictures of trash",
-  "2022 02 12 pictures of trash",
-  "2022 02 14 pictures of trash",
-  "2022 02 28 Carlos trash pick up",
-  "2022 03 21 storm before and after",
-  "2022 03 23 pictures of trash",
-  "2022 04 26 pictures of trash",
-  "2022 04 27 Carlos trash pick up",
-  "2022 05 23 trash on grate at Murphy",
-  "2022 05 24 to 2022 05 25 before and after, overnight time lapse",
-  "2022 05 25 to 2022 07 01 time lapse",
-  "2022 07 02 pictures of trash",
-  "2022 07 05 Carlos trash pick up",
-  "2022 08 23 pictures of trash and broken camera",
-  "2022 08 29 pictures of trash",
-  "2022 09 01 pictures of trash",
-  "2022 09 11 pictures of trash",
-  "2022 10 29 video of trash",
-  "2022 11 08 pictures and video of trash",
-  "2022 11 09 picture of contech and grate on Westbank",
-  "2022 11 10 install back corner camera",
-  "2022 11 11 rain storm",
-  "2022 11 13 pictures of trash",
-  "2022 11 14 trash and clean-up by Carlos",
-  "2022 12 02 video of two men",
-  "2022 12 03 pictures of trash",
-  "2023 02 23 Murphy contractor looks at drain",
-  "2023 03 01 mystery person looks at drain",
-  "2023 03 09 mystery person with tool",
-  "2023 03 15 mystery person",
-  "2023 03 24 riding lawn mower",
-  "2023 04 03 pictures of trash, chicken wire",
-  "2023 04 09 pictures of trash",
-  "2023 04 13 riding lawn mower",
-  "2023 04 20 riding lawn mower",
-  "2023 05 07 pictures of trash",
-*/
+  ["2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 03.jpg","Time lapse camera picture before rain."],
+  ["2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 04.jpg","Time lapse camera picture after rain."],
+  ["2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 29.jpg","Time lapse camera picture after rain."],
+  ["2022 07 02 pictures of trash\\IMG_5189.HEIC","Picture of face mask."],
+  ["2022 07 02 pictures of trash\\IMG_5202.HEIC","Picture of different face mask and trash."],
 ];
 
 Main.Documents.MyDocument = new MyDocumentClass;
@@ -158,7 +98,7 @@ class MyDocumentClass: DocumentClass {
   }
 
   override GetDocument = Document {
-    Section {
+/*    Section {
       SectionBreak: SectionBreaks.NextPage;
       Paragraph {
         ParAlignment: ParAlignments.Center;
@@ -166,7 +106,7 @@ class MyDocumentClass: DocumentClass {
         SpaceBefore: 2 inches;
         LawsuitName;
       };
-    };
+    };*/
     AddExhibits;
   };
 
