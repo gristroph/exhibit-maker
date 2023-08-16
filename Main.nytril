@@ -2,8 +2,6 @@ include "Languages";
 
 using Format, Units, IO;
 
-LawsuitName = "";
-
 // EvidenceFolder = Folders.Source Folders.Up Folder("Lawsuit");
 EvidenceFolder = "C:\\Users\\Gunnar\\Google Drive Streaming\\My Drive\\1703 Johnson Way\\Legal, Neighbors\\South Property Line\\2020 Trash Removal\\Shared Folder - Ristroph Stormwater\\";
 
@@ -103,41 +101,10 @@ class MyDocumentClass: DocumentClass {
   }
 
   override GetDocument = Document {
-/*    Section {
-      SectionBreak: SectionBreaks.NextPage;
-      Paragraph {
-        ParAlignment: ParAlignments.Center;
-        TextHeight: 60 pts;
-        SpaceBefore: 2 inches;
-        LawsuitName;
-      };
-    };*/
     AddExhibits;
   };
 
   AddExhibits = Section {
-    SectionBreak: SectionBreaks.OddPage;
-    Header: Block {
-      Distance: 0.25 inches;
-      Paragraph {
-        ParAlignment: ParAlignments.Right;
-        LawsuitName
-      };
-      Even: Block {
-        Paragraph {
-          LawsuitName
-        }
-      };
-      First: Block;
-    };
-    Footer: Block {
-      Distance: 0.5 inches;
-      Paragraph {
-        ParAlignment: ParAlignments.Center;
-//        Lang.PageNumbers(DocFields.PageNumber, DocFields.PageCount);
-      };
-    };
-
     foreach (var exhibit in Exhibits)
       exhibit.Show;
   };
