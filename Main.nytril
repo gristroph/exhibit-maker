@@ -102,17 +102,14 @@ class ExibitClass {
 
       Paragraph {
         TextFormat: "f";
-        Image.Taken;
+        "Time (from meta data): " Image.Taken;
       };
 
       Paragraph {
-        Folder;
-        "/";
-        FileName;
+        "File name: " Folder "/" FileName;
       };
 
-      HBox(null, null, new EdgeClass(5, 0, Colors.LightGray)) {
-        BorderRadius: 10;
+      HBox(null, null, null) {
         Image.FitSize(new SizeClass(4 inches, 2.4 inches));
       };
     }
