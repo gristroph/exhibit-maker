@@ -8,8 +8,12 @@ LawsuitName = "Gunnar v. Doe";
 EvidenceFolder = "C:\\Users\\Gunnar\\Google Drive Streaming\\My Drive\\1703 Johnson Way\\Legal, Neighbors\\South Property Line\\2020 Trash Removal\\Shared Folder - Ristroph Stormwater\\";
 
 EvidenceFiles = [
-  ["2018 12 29 pictures of trash, screen\\IMG_20181229_154945.jpg","Trash."],
-  ["2018 12 29 pictures of trash, screen\\IMG_20181229_154954.jpg","More trash."],
+  ["2022 05 23 trash on grate at Murphy\\2022 05 23 trash on grate at Murphy Express.jpg","Moon Valley Nurseries tag on the storm inlet on Murphy property."],
+  ["2022 09 01 pictures of trash\\IMG_6129.HEIC","Moon Valley Nurseries tag on Ristroph property."],
+  ["2022 09 11 pictures of trash\\IMG_6974.HEIC","Moon Valley Nurseries tag on Ristroph property."],
+  ["2022 11 08 pictures and video of trash\\IMG_6660.HEIC","Moon Valley Nurseries tag on Ristroph property."],
+  ["2022 11 13 pictures of trash\\IMG_6829.HEIC","Moon Valley Nurseries tag on Ristroph property."],
+
 /*
   "2019 01 03 pictures of trash on screen",
   "2019 03 15 pictures of trash",
