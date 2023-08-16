@@ -15,21 +15,21 @@ class EvidenceFileClass {
 
 
 EvidenceFileClass[] EvidenceFiles = [
-  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m16s.jpg","Frame grab from video of trash in storm water outflow."),
-  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m20s.jpg","Frame grab from video of trash in storm water outflow."),
-  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m37s.jpg","Frame grab from video of trash in storm water outflow."),
-  new("2022 05 23 trash on grate at Murphy\\2022 05 23 trash on grate at Murphy Express.jpg","Moon Valley Nurseries tag on the storm inlet on Murphy property."),
-  new("2022 09 01 pictures of trash\\IMG_6129.HEIC","Moon Valley Nurseries tag on Ristroph property."),
-  new("2022 09 11 pictures of trash\\IMG_6974.HEIC","Moon Valley Nurseries tag on Ristroph property."),
-  new("2022 11 08 pictures and video of trash\\IMG_6660.HEIC","Moon Valley Nurseries tag on Ristroph property."),
-  new("2022 11 13 pictures of trash\\IMG_6829.HEIC","Moon Valley Nurseries tag on Ristroph property."),
-  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 03.jpg","Time lapse camera picture before rain."),
-  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 04.jpg","Time lapse camera picture after rain."),
-  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 29.jpg","Time lapse camera picture after rain."),
-  new("2022 07 02 pictures of trash\\IMG_5189.HEIC","Picture of face mask."),
-  new("2022 07 02 pictures of trash\\IMG_5202.HEIC","Picture of different face mask and trash."),
-  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m23s.jpg","Drain outlet before rain."),
-  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m37s.jpg","Drain outlet after rain."),
+  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m16s.jpg","Caution tape in storm water outflow."),
+  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m20s.jpg","Caution tape in storm water outflow."),
+  new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m37s.jpg","Caution tape in storm water outflow."),
+  new("2022 05 23 trash on grate at Murphy\\2022 05 23 trash on grate at Murphy Express.jpg","Moon Valley Nurseries tag on a storm inlet on Murphy property."),
+  new("2022 09 01 pictures of trash\\IMG_6129.HEIC","Moon Valley Nurseries tag."),
+  new("2022 09 11 pictures of trash\\IMG_6974.HEIC","Moon Valley Nurseries tag."),
+  new("2022 11 08 pictures and video of trash\\IMG_6660.HEIC","Moon Valley Nurseries tag."),
+  new("2022 11 13 pictures of trash\\IMG_6829.HEIC","Moon Valley Nurseries tag."),
+  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 03.jpg","Storm drain outlet before rain."),
+  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 04.jpg","Storm drain outlet after rain, with face mask."),
+  new("2022 05 25 to 2022 07 01 time lapse\\2022 05 25 to 2022 07 02 time lapse 06 29.jpg","Storm drain outlet after rain, with face mask."),
+  new("2022 07 02 pictures of trash\\IMG_5189.HEIC","Face mask."),
+  new("2022 07 02 pictures of trash\\IMG_5202.HEIC","Different face mask and other trash."),
+  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m23s.jpg","Storm drain outlet before rain."),
+  new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m37s.jpg","Storm drain outlet after rain."),
   new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\IMG_4913 - frame at 0m19s.jpg","Aluminum foil."),
   new("2022 07 02 pictures of trash\\IMG_5195.HEIC","Aluminum foil."),
   new("2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m44s.jpg","Aluminum foil in trash bag.")
@@ -72,6 +72,7 @@ class ExhibitClass {
         "File name: " ShortFileName;
       };
 
+      if (Image.Taken != #1-1-1 0:0:0#)  // #1-1-1 0:0:0#
       Paragraph {
         "Time (from meta data): " Image.Taken;
       };
@@ -117,12 +118,11 @@ class MyDocumentClass: DocumentClass {
     Paragraph {
       ParAlignment: ParAlignments.Center;
       TextHeight: 20 pts;
-      "Exibits";
+      "Exhibits";
     };
     foreach (var exhibit in Exhibits) {
       Paragraph(null, [32 pts]) {
         exhibit.Number;
-        ")";
         Tab;
         Span {
           Action: new ActionClass(Actions.ToAnchor, exhibit.Number);
