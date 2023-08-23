@@ -15,6 +15,8 @@ class EvidenceFileClass {
 
 
 EvidenceFileClass[] EvidenceFiles = [
+//  new("2023 08 15 Round Rock City View\\2023 08 15 Round Rock City View.jpg","Screen capture of Round Rock City View web site."),
+//  new("2021 05 12 visit by Clean Earth Solutions\\PXL_20210512_154421450.jpg","Storm system design drawing."),
   new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m16s.jpg","Caution tape in storm water outflow."),
   new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m20s.jpg","Caution tape in storm water outflow."),
   new("2020 03 30 video of trash coming out, pictures of flow\\2020 03 30 video of trash coming out - frame at 1m37s.jpg","Caution tape in storm water outflow."),
@@ -33,7 +35,13 @@ EvidenceFileClass[] EvidenceFiles = [
   new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\TLC00001 - frame at 0m37s.jpg","Storm drain outlet after rain, with aluminum foil."),
   new("2022 05 24 to 2022 05 25 before and after, overnight time lapse\\IMG_4913 - frame at 0m19s.jpg","Aluminum foil."),
   new("2022 07 02 pictures of trash\\IMG_5195.HEIC","Aluminum foil."),
-  new("2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m44s.jpg","Aluminum foil in trash bag.")
+  new("2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m44s.jpg","Aluminum foil in trash bag."),
+  new("2022 04 27 Carlos trash pick up\\IMG_4620 - frame at 0m5s.jpg","Workers picking up trash."),
+  new("2022 04 27 Carlos trash pick up\\IMG_4620 - frame at 0m10s.jpg","Worker putting trash in bag."),
+  new("2022 04 27 Carlos trash pick up\\IMG_4620 - frame at 0m18s.jpg","Worker holding different bag of trash."),
+  new("2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m40s.jpg","Workers picking up trash."),
+  new("2022 07 05 Carlos trash pick up\\2022 07 05 workers picking up trash - frame at 0m37s.jpg","Workers picking up trash."),
+  new("2022 11 14 trash and clean-up by Carlos\\69015940244__5D01CEE9-E5D0-405A-9CC3-B6F71438DB7C.HEIC","Worker holding bag of trash."),
 ];
 
 Main.Documents.MyDocument = new MyDocumentClass;
@@ -83,7 +91,7 @@ class ExhibitClass {
       };
 
       HBox(null, null, null) {
-        Image.FitSize(new SizeClass(6 inches, 6 inches));
+        Image.FitSize(new SizeClass(6.5 inches, 6.5 inches));
       };
     }
   };
@@ -98,7 +106,7 @@ class MyDocumentClass: DocumentClass {
     super.Constructor(#586455c1-7c7e-42ef-a73e-da9548a0058a#, "Exhibit-Maker");
 
     Exhibits = new(1024);
-    var num = 101;
+    var num = 19;
     foreach (var l in EvidenceFiles)
       AddPicture(l.Path,l.Comment,num++);
   }
