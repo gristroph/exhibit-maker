@@ -51,10 +51,10 @@ Main.Documents.MyDocument = new MyDocumentClass;
 //==================================================================
 
 class ExhibitClass {
-  var        ShortFileName; // the name of the file including the folder, but without the full parent directory name
-  var        Description; // comment
-  var        Number;
-  ImageClass Image;  // the actual image
+  var            ShortFileName; // the name of the file including the folder, but without the full parent directory name
+  var            Description; // comment
+  var            Number;
+  var ImageClass Image;  // the actual image
 
   Constructor(shortfilename, ImageClass image, description, number) {
     ShortFileName = shortfilename;
@@ -91,7 +91,7 @@ class ExhibitClass {
       };
 
       HBox(null, null, null) {
-        Image.FitSize(new SizeClass(6.5 inches, 6.5 inches));
+        ImageBox(Image, 6.5 inches, 6.5 inches);
       };
     }
   };
@@ -100,7 +100,7 @@ class ExhibitClass {
 //==================================================================
 
 class MyDocumentClass: DocumentClass {
-  ListClass<ExhibitClass> Exhibits;
+  var ListClass<ExhibitClass> Exhibits;
 
   Constructor {
     super.Constructor(#586455c1-7c7e-42ef-a73e-da9548a0058a#, "Exhibit-Maker");
@@ -112,7 +112,7 @@ class MyDocumentClass: DocumentClass {
   }
 
   void AddPicture(filename, description, number) {
-    switch (ToLower(GetFileExtension(filename))) {
+    switch (GetFileExtension(filename).ToLower) {
       case "heic";
       case "jpg";
         var image = Read(EvidenceFolder FileName(filename));
